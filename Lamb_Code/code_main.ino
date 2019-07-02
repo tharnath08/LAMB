@@ -34,7 +34,7 @@ void loop() {
 
   if(digitalRead(10)){
     delay(2000);
-    while(digitalRead(10)==0){            
+    while(digitalRead(10)==0){
       read_sensor_values();
       find_error();
       Serial.print(error);
@@ -45,7 +45,6 @@ void loop() {
       motor_control();
      }
    }
-  // put your main code here, to run repeatedly:
 
 }
 void calibrate_sensor(){
@@ -58,22 +57,22 @@ void calibrate_sensor(){
       for(int k=0;k<7;k++){
           temp=analogRead(k);
           smin[k]=min(temp,smin[k]);
-          smax[k]=max(temp,smax[k]);        
+          smax[k]=max(temp,smax[k]);
       }
-   }  
+   }
    digitalWrite(13,LOW);
    return;
 }
 
 
-void read_sensor_values(){  
+void read_sensor_values(){
   for(int i=0;i<7;i++){
     sensor[i]=analogRead(i);
   }
   for(int i=0;i<7;i++){
     val[i]=map(sensor[i],smin[i],smax[i],0,1024);
   }
-  
+
   return;
 }
 void find_error(){
@@ -81,15 +80,15 @@ void find_error(){
     for(int i=0;i<7;i++){
       denom+=val[i];
     }
-    error=num/denom;    
+    error=num/denom;
 }
 void calculate_pid(){
     P = error;
     I = I + previous_I;
     D = error-previous_error;
-    
+
     PID_value = (Kp*P) + (Ki*I) + (Kd*D);
-    
+
     previous_I=I;
     previous_error=error;
     return;
@@ -97,16 +96,16 @@ void calculate_pid(){
 void motor_control(){
   int lmspeed = imspeed-PID_value;
   int rmspeed = imspeed+PID_value;
-  
+
   constrain(lmspeed,0,255);
   constrain(rmspeed,0,255);
-  
+
   analogWrite(5,lmspeed);
   analogWrite(6,rmspeed);
-  
+
   digitalWrite(2,HIGH);
   digitalWrite(4,LOW);
   digitalWrite(8,LOW);
   digitalWrite(7,HIGH);
-  
+
 }
