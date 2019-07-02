@@ -50,12 +50,12 @@ void loop() {
 }
 void calibrate_sensor(){
    int tim=millis();
-   int temp,sec,actim,k;
+   int temp,sec=0,actim,k;
    digitalWrite(13,HIGH);
    while(sec<=5000){
       actim=millis();
       sec=actim-tim;
-      for(k=0;k<7;k++){
+      for(int k=0;k<7;k++){
           temp=analogRead(k);
           smin[k]=min(temp,smin[k]);
           smax[k]=max(temp,smax[k]);        
