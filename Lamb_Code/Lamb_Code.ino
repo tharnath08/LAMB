@@ -1,6 +1,6 @@
 //VARIABLES::::
 
-float Kp=1,Ki=0,Kd=0;
+float Kp=2,Ki=0,Kd=0;
 float P=0, I=0, D=0, PID_value=0;
 float num=0,error=0,denom=0;
 float previous_error=0, previous_I=0;
@@ -78,9 +78,10 @@ void read_sensor_values(){
 void find_error(){
     num=(weight[0]*(val[6]-val[0]))+(weight[1]*(val[5]-val[1]))+(weight[2]*(val[4]-val[2]));
     for(int i=0;i<7;i++){
-      denom+=val[i];
+      denom=denom+val[i];
     }
     error=num/denom;
+    return;
 }
 void calculate_pid(){
     P = error;
