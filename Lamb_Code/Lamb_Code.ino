@@ -36,6 +36,20 @@ void loop() {
     delay(2000);
     while(digitalRead(10)==0){
       read_sensor_values();
+     /* Serial.print(val[0]);
+    Serial.print(" ");
+    Serial.print(val[1]);
+    Serial.print(" ");
+    Serial.print(val[2]);
+    Serial.print(" ");
+    Serial.print(val[3]);
+    Serial.print(" ");
+    Serial.print(val[4]);
+    Serial.print(" ");
+    Serial.print(val[5]);
+    Serial.print(" ");
+    Serial.print(val[6]);
+    Serial.println();*/
       find_error();
       Serial.print(error);
       Serial.println();
@@ -72,6 +86,9 @@ void read_sensor_values(){
   for(int i=0;i<7;i++){
     val[i]=map(sensor[i],smin[i],smax[i],0,1024);
   }
+  for(int i=0;i<7;i++){
+  }
+ 
 
   return;
 }
