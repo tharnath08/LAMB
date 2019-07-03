@@ -87,6 +87,7 @@ void read_sensor_values(){
     val[i]=map(sensor[i],smin[i],smax[i],0,1024);
   }
   for(int i=0;i<7;i++){
+    val[i]=constrain(val[i],0,1023);
   }
  
 
