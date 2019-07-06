@@ -51,11 +51,13 @@ void loop() {
     Serial.print(val[6]);
     Serial.println();*/
       find_error();
-      Serial.print(error);
-      Serial.println();
+    Serial.print(num);
+    Serial.print("      "); 
+    Serial.print(denom);
+    Serial.println();
       calculate_pid();
-      //Serial.print(PID_value);
-      //Serial.println();
+     //Serial.print(PID_value);
+     //Serial.println();
       motor_control();
      }
    }
@@ -98,6 +100,7 @@ void find_error(){
     for(int i=0;i<7;i++){
       denom=denom+val[i];
     }
+
     error=num/denom;
     return;
 }
