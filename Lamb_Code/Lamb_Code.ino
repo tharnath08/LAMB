@@ -6,7 +6,7 @@ float num=0,error=0,denom=0;
 float previous_error=0, previous_I=0;
 int sensor[7]={0,0,0,0,0,0,0},val[7]={0,0,0,0,0,0,0},smin[7]={1024,1024,1024,1024,1024,1024,1024},smax[7]={0,0,0,0,0,0,0};
 float weight[7]={-41.25,-27.5,-13.75,0,13.75,27.5,41.25};
-int rmspeed,lmspeed,imspeed=100;
+int rmspeed,lmspeed,imspeed=160;
 
 //FUNCTIONS::::
 void calibrate_sensor(void);
@@ -36,7 +36,7 @@ void loop() {
     delay(2000);
     while(digitalRead(10)==0){
       read_sensor_values();
-     /* Serial.print(val[0]);
+    /*Serial.print(val[0]);
     Serial.print(" ");
     Serial.print(val[1]);
     Serial.print(" ");
@@ -51,10 +51,11 @@ void loop() {
     Serial.print(val[6]);
     Serial.println();*/
       find_error();
-    Serial.print(num);
+      Serial.println(error);
+   /* Serial.print(num);
     Serial.print("      "); 
     Serial.print(denom);
-    Serial.println();
+    Serial.println();*/
       calculate_pid();
      //Serial.print(PID_value);
      //Serial.println();
@@ -96,10 +97,9 @@ void read_sensor_values(){
   return;
 }
 void find_error(){
+    denom=0;
     num=(weight[0]*(val[6]-val[0]))+(weight[1]*(val[5]-val[1]))+(weight[2]*(val[4]-val[2]));
-    for(int i=0;i<7;i++){
-      denom=denom+val[i];
-    }
+    denom=val[0]+val[1]+val[2]+val[3]+val[4]+val[5]+val[6];
 
     error=num/denom;
     return;
