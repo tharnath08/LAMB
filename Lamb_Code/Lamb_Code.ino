@@ -1,12 +1,12 @@
 //VARIABLES::::
 
-float Kp=2,Ki=0,Kd=0;
+float Kp=4,Ki=0,Kd=1.2;
 float P=0, I=0, D=0, PID_value=0;
 float num=0,error=0,denom=0;
 float previous_error=0, previous_I=0;
 int sensor[7]={0,0,0,0,0,0,0},val[7]={0,0,0,0,0,0,0},smin[7]={1024,1024,1024,1024,1024,1024,1024},smax[7]={0,0,0,0,0,0,0};
 float weight[7]={-41.25,-27.5,-13.75,0,13.75,27.5,41.25};
-int rmspeed,lmspeed,imspeed=160;
+int rmspeed,lmspeed,imspeed=140;
 
 //FUNCTIONS::::
 void calibrate_sensor(void);
