@@ -1,6 +1,6 @@
 //VARIABLES::::
 
-float Kp=4,Ki=0,Kd=1.2;
+float Kp=4,Ki=23,Kd=1.2;
 float P=0, I=0, D=0, PID_value=0;
 float num=0,error=0,denom=0;
 float previous_error=0, previous_I=0;
@@ -53,7 +53,7 @@ void loop() {
       find_error();
       Serial.println(error);
    /* Serial.print(num);
-    Serial.print("      "); 
+    Serial.print("      ");
     Serial.print(denom);
     Serial.println();*/
       calculate_pid();
@@ -92,7 +92,7 @@ void read_sensor_values(){
   for(int i=0;i<7;i++){
     val[i]=constrain(val[i],0,1023);
   }
- 
+
 
   return;
 }
